@@ -1,69 +1,50 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import Cat from "@/components/Cat";
+import { getAllPosts, formatDate } from "@/lib/posts";
 
 export default function Home() {
+  const posts = getAllPosts().slice(0, 3);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <div className="cat-row">
+        <Cat index={14} size="large" />
+      </div>
+
+      <h1>Hi! I&apos;m Ollie.</h1>
+      <p>
+        I write things here now and then, and I keep
+        copies of papers I&apos;ve written over on the <Link href="/papers/">papers</Link> page.
+      </p>
+      <p>
+        The clouds are procedurally generated. The cats are hand-typed.
+      </p>
+
+      <h2>Recent writing</h2>
+      {posts.length === 0 ? (
+        <p className="muted">Nothing yet. Check back soon.</p>
+      ) : (
+        <ul className="entry-list">
+          {posts.map((post) => (
+            <li key={post.slug} className="entry">
+              <div className="entry__title">
+                <Link href={`/blog/${post.slug}/`}>{post.title}</Link>
+              </div>
+              <div className="entry__meta">{formatDate(post.date)}</div>
+              {post.description && <p className="entry__desc">{post.description}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+      <p>
+        <Link href="/blog/">All posts &rarr;</Link>
+      </p>
+
+      <hr />
+      <div className="cat-row">
+        <Cat index={13} />
+        <Cat index={2} />
+      </div>
+    </>
   );
 }

@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# olliesite
 
-## Getting Started
+Ollie Moreland's personal site. Static Next.js, sky-blue background with
+procedurally generated cloud wisps, a markdown blog, a papers page, and a
+healthy number of ASCII cats.
 
-First, run the development server:
+## Run it locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # writes the static site to ./out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Write a blog post
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add a markdown file to `content/posts/`. The filename becomes the URL slug
+(`content/posts/my-post.md` -> `/blog/my-post/`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```markdown
+---
+title: My post
+date: 2026-11-12
+description: Shows up in the post list and in the page's meta description.
+tags: [thoughts, cats]
+draft: false
+---
 
-## Learn More
+Markdown body. GitHub-flavoured markdown is supported.
+```
 
-To learn more about Next.js, take a look at the following resources:
+Posts with `draft: true` are hidden in production builds but visible in `npm run dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Add a paper
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Put the PDF in `public/papers/`, e.g. `public/papers/my-paper.pdf`.
+2. Add `content/papers/my-paper.md`:
+
+```markdown
+---
+title: My Paper Title
+date: 2026-03-01
+authors: Ollie Moreland, A. Coauthor
+venue: Where it appeared (optional)
+pdf: /papers/my-paper.pdf
+---
+
+Abstract or notes, in markdown.
+```
+
+If `pdf` is omitted it defaults to `/papers/<filename>.pdf`.
+
+## Add a cat
+
+Append a cat to `content/cats.txt`, separated from the previous one by a line
+containing only `---`. Cats are picked by index (`<Cat index={3} />`) or
+deterministically from a seed (`<Cat seed={post.slug} />`).
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push this repo to GitHub.
+2. In Vercel, "Add New Project" and import the repo. The Next.js preset is
+   detected automatically; no settings need changing. `output: "export"` in
+   `next.config.ts` makes the build fully static.
+3. Every push to `main` triggers a rebuild and deploy. Pushes to other
+   branches get preview URLs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Layout
+
+```
+content/
+  cats.txt          ASCII cats
+  posts/*.md        blog posts
+  papers/*.md       paper metadata + abstracts
+public/papers/*.pdf the PDFs themselves
+src/
+  app/              routes (/, /blog, /blog/[slug], /papers, 404)
+  components/       Clouds (canvas), Cat, Header, Footer, Markdown
+  lib/              post/paper/cat loaders (build-time filesystem reads)
+```

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# loose cat drafts in the repo root (already folded into content/cats.txt)
+/cat*.txt
+/:w
+
+# editor state
+.obsidian/
