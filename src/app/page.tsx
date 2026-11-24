@@ -35,7 +35,7 @@ export default function Home() {
 
       <hr />
       <div className="cat-row">
-        <Cat index={0} />
+        <Cat index={3} />
         <Cat index={2} />
       </div>
     </>
