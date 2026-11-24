@@ -62,7 +62,7 @@ deterministically from a seed (`<Cat seed={post.slug} />`).
 2. In Vercel, "Add New Project" and import the repo. The Next.js preset is
    detected automatically; no settings need changing. `output: "export"` in
    `next.config.ts` makes the build fully static.
-3. Every push to `main` triggers a rebuild and deploy. Pushes to other
+3. Every push to `main` triggers a rebuild and deploy (live at https://olliesite-nine.vercel.app). Pushes to other
    branches get preview URLs.
 
 ## Layout
