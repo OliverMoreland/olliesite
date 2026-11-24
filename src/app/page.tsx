@@ -13,11 +13,7 @@ export default function Home() {
 
       <h1>Hi! I&apos;m Ollie.</h1>
       <p>
-        I write things here now and then, and I keep
-        copies of papers I&apos;ve written over on the <Link href="/papers/">papers</Link> page.
-      </p>
-      <p>
-        The clouds are procedurally generated. The cats are hand-typed.
+        I write things here now and then. 
       </p>
 
       <h2>Recent writing</h2>

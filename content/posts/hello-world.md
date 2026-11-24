@@ -1,8 +1,9 @@
 ---
 title: Hello, world
 date: 2026-11-04
-description: Who I am, and why I made this site
-tags: [meta]
+description: Who I am, and why I made this site.
+tags:
+  - meta
 ---
 
 
