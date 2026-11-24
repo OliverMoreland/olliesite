@@ -11,7 +11,7 @@ export default function BlogIndex() {
   return (
     <>
       <div className="cat-row">
-        <Cat index={13} />
+        <Cat index={0} />
       </div>
       <h1>Blog</h1>
       {posts.length === 0 ? (

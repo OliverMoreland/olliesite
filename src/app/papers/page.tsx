@@ -12,7 +12,7 @@ export default function PapersPage() {
   return (
     <>
       <div className="cat-row">
-        <Cat index={15} />
+        <Cat index={2} />
       </div>
       <h1>Papers</h1>
       <p className="muted">Things I&apos;ve written that came out as PDFs.</p>

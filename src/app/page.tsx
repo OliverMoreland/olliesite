@@ -7,9 +7,6 @@ export default function Home() {
 
   return (
     <>
-      <div className="cat-row">
-        <Cat index={14} size="large" />
-      </div>
 
       <h1>Hi! I&apos;m Ollie.</h1>
       <p>
@@ -38,7 +35,7 @@ export default function Home() {
 
       <hr />
       <div className="cat-row">
-        <Cat index={13} />
+        <Cat index={0} />
         <Cat index={2} />
       </div>
     </>

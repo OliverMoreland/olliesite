@@ -52,9 +52,21 @@ If `pdf` is omitted it defaults to `/papers/<filename>.pdf`.
 
 ## Add a cat
 
-Append a cat to `content/cats.txt`, separated from the previous one by a line
-containing only `---`. Cats are picked by index (`<Cat index={3} />`) or
-deterministically from a seed (`<Cat seed={post.slug} />`).
+Draw the cat in any text file (leading blank lines, big left margins and tabs
+are fine) and run:
+
+```bash
+npm run newcat -- path/to/cat.txt
+```
+
+It strips the padding, skips cats that are already in the collection, and
+appends the result to `content/cats.txt`. Pass several files to add several
+cats, or `--dry-run` to preview without writing. Each cat in `content/cats.txt`
+is separated from the next by a line containing only `---`.
+
+Cats are picked by index (`<Cat index={3} />`, counting from 0 in file order)
+or deterministically from a seed (`<Cat seed={post.slug} />`). An index past
+the end wraps around.
 
 ## Deploy on Vercel
 
@@ -77,4 +89,5 @@ src/
   app/              routes (/, /blog, /blog/[slug], /papers, 404)
   components/       Clouds (canvas), Cat, Header, Footer, Markdown
   lib/              post/paper/cat loaders (build-time filesystem reads)
+scripts/newcat.mjs  add a cat from a text file (npm run newcat)
 ```
